@@ -1,11 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { SyntheticEvent ,useState } from "react";
 
 
 export default function AddProducts() {
+  const [title, setTitle] = useState('')
+  const [price, setPrice] = useState('')
   const [modal, setModal] = useState(false)
-  function handleChange(){
+  const router = useRouter()
+  const handleChange = () =>{
     setModal(!modal);
+  }
+  async function handleSubmit(e: SyntheticEvent){
+    
+    e.preventDefault()
+    await fetch(`http://localhost:5000/products`,{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: title,
+        price: price
+      })
+    })
+    setTitle('')
+    setPrice('')
+    router.refresh()
+    setModal(false)
   }
   return (
     <div>
@@ -14,11 +36,14 @@ export default function AddProducts() {
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Tambah Data</h3>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label className="label font-bold">Title</label>
               <input
                 type="text"
+                value={title}
+                name="title"
+                onChange={(e) => {setTitle(e.target.value)}}
                 className="input w-full input-bordered"
                 placeholder="Enter product name"
               />
@@ -26,7 +51,10 @@ export default function AddProducts() {
             <div className="form-control">
               <label className="label font-bold">Price</label>
               <input
-                type="number"
+                type="text"
+                value={price}
+                name="price"
+                onChange={(e) => {setPrice(e.target.value)}}
                 className="input w-full input-bordered"
                 placeholder="Enter price"
               />
