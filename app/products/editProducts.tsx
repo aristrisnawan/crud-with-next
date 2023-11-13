@@ -22,7 +22,7 @@ export default function EditProducts(product: data) {
     e.preventDefault()
     setIsMutating(true)
     await fetch(`http://localhost:5000/products/${product.id}`,{
-      method: 'DELETE',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
