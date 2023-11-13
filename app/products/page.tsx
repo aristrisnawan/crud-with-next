@@ -1,5 +1,6 @@
 import AddProducts from "./addProducts";
 import DeleteProducts from "./deleteProducts";
+import EditProducts from "./editProducts";
 
 interface Products {
   id: number;
@@ -36,7 +37,7 @@ export default async function ProductList() {
                 <td>{idx+1}</td>
                 <td>{datas.title}</td>
                 <td>{datas.price}</td>
-                <td><DeleteProducts {...datas}/></td>
+                <td className=" flex gap-x-2"><DeleteProducts {...datas}/> <EditProducts {...datas}/></td>
               </tr>
             );
           })}
