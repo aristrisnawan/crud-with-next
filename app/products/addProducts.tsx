@@ -69,9 +69,6 @@ export default function AddProducts() {
               <button type={!isMutating ? 'submit' : 'button'} className={`btn ${!isMutating ? 'btn-primary' : 'loading'}`}>
                 {!isMutating ? 'Add' : 'Adding...'}
               </button>
-              {/* <button type="button" className="btn loading">
-                Adding...
-              </button> */}
             </div>
           </form>
         </div>

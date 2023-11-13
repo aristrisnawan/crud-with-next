@@ -1,4 +1,5 @@
 import AddProducts from "./addProducts";
+import DeleteProducts from "./deleteProducts";
 
 interface Products {
   id: number;
@@ -32,10 +33,10 @@ export default async function ProductList() {
           {products.map((datas, idx) => {
             return (
               <tr key={idx}>
-                <td>{datas.id}</td>
+                <td>{idx+1}</td>
                 <td>{datas.title}</td>
                 <td>{datas.price}</td>
-                <td>halo</td>
+                <td><DeleteProducts {...datas}/></td>
               </tr>
             );
           })}
